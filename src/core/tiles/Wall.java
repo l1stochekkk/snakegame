@@ -1,3 +1,5 @@
+package core.tiles;
+
 public class Wall implements Tile {
     @Override
     public void print() {

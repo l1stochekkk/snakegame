@@ -1,3 +1,4 @@
+package core.arrows;
 public class Up implements Arrow {
 
     public int deltaX;

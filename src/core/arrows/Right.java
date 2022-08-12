@@ -1,4 +1,5 @@
-public class Left implements Arrow {
+package core.arrows;
+public class Right implements Arrow {
     @Override
     public int getDeltaX() {
         return 0;
@@ -6,6 +7,6 @@ public class Left implements Arrow {
 
     @Override
     public int getDeltaY() {
-        return -1;
+        return 1;
     }
 }

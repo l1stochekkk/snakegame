@@ -1,3 +1,5 @@
+package core.tiles;
+
 public class EmptyTile implements Tile {
 
     @Override

@@ -1,3 +1,10 @@
+package display;
+
+import core.arrows.*;
+import core.GameMap;
+import core.tiles.SnakeBody;
+import core.tiles.Tile;
+
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -32,12 +39,12 @@ public class Show {
     public static void gameOver(Scanner newGame) {
         System.out.println();
         System.out.println("Game over");
-        System.out.println("Your score: " + Map.getScore());
-        System.out.println("Start new game?");
+        System.out.println("Your score: " + GameMap.getScore());
+        System.out.println("Start new game? (y)");
         System.out.println();
         if (Objects.equals(newGame.next(), "y")) {
             snakeAlive = true;
-            Map.init();
+            GameMap.init();
         }
 
     }
@@ -46,7 +53,7 @@ public class Show {
         while (Show.snakeAlive) {
             Arrow arrow = stringToArrow(scanArrow.next());
             if (arrow != null) {
-                Map.update(arrow);
+                GameMap.update(arrow);
             } else Show.incorrectPos();
             if (!Show.snakeAlive) {
                 Show.gameOver(scanArrow);

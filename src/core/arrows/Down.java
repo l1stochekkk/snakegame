@@ -1,3 +1,4 @@
+package core.arrows;
 public class Down implements Arrow {
     @Override
     public int getDeltaX() {

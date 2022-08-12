@@ -1,3 +1,9 @@
+package core.tiles;
+
+import core.arrows.Arrow;
+import core.GameMap;
+import display.Show;
+
 public class SnakeBody implements Tile {
 
     private final int number;
@@ -12,7 +18,7 @@ public class SnakeBody implements Tile {
 
     @Override
     public void print() {
-        if (number == Map.getHeadNumber()) {
+        if (number == GameMap.getHeadNumber()) {
             System.out.print("#");
         } else System.out.print("O");
     }
@@ -90,7 +96,7 @@ public class SnakeBody implements Tile {
         }
         if (checkNextPosIsMeal(map, deltaX, deltaY)) {
             moveHead(map, deltaX, deltaY);
-            Map.genMeal();
+            GameMap.genMeal();
             return;
         }
         moveTail(map);

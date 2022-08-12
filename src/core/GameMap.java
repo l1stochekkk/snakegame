@@ -1,4 +1,10 @@
-public class Map {
+package core;
+
+import core.arrows.Arrow;
+import display.Show;
+import core.tiles.*;
+
+public class GameMap {
 
     static int size = 21;
 
