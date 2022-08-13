@@ -4,9 +4,25 @@ import core.arrows.Arrow;
 import core.GameMap;
 import display.Show;
 
+import java.util.Objects;
+
 public class SnakeBody implements Tile {
 
     private final int number;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SnakeBody snakeBody = (SnakeBody) o;
+        return number == snakeBody.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
+    }
+
     private static int headX;
     private static int headY;
     private static int tailX;
@@ -45,18 +61,26 @@ public class SnakeBody implements Tile {
     }
 
     private static void moveTail(Tile[][] map) {
-        for (int i = -1; i < 2; i += 2) {
-            if (map[tailX + i][tailY] instanceof SnakeBody && getTailNumber(map) == ((SnakeBody) map[tailX + i][tailY]).number - 1) {
-                map[tailX + i][tailY] = new SnakeBody(getTailNumber(map) + 1);
+            if (map[tailX - 1][tailY] instanceof SnakeBody && getTailNumber(map) == ((SnakeBody) map[tailX - 1][tailY]).number - 1) {
+                map[tailX - 1][tailY] = new SnakeBody(getTailNumber(map) + 1);
                 map[tailX][tailY] = new EmptyTile();
-                tailX = tailX + i;
+                tailX--;
             }
-            else if (map[tailX][tailY + i] instanceof SnakeBody && getTailNumber(map) == ((SnakeBody) map[tailX][tailY + i]).number - 1) {
-                map[tailX][tailY + i] = new SnakeBody(getTailNumber(map) + 1);
+            else if (map[tailX + 1][tailY] instanceof SnakeBody && getTailNumber(map) == ((SnakeBody) map[tailX + 1][tailY]).number - 1) {
+                map[tailX + 1][tailY] = new SnakeBody(getTailNumber(map) + 1);
                 map[tailX][tailY] = new EmptyTile();
-                tailY = tailY + i;
+                tailX++;
             }
-        }
+            else if (map[tailX][tailY - 1] instanceof SnakeBody && getTailNumber(map) == ((SnakeBody) map[tailX][tailY - 1]).number - 1) {
+                map[tailX][tailY - 1] = new SnakeBody(getTailNumber(map) + 1);
+                map[tailX][tailY] = new EmptyTile();
+                tailY--;
+            }
+            else if (map[tailX][tailY + 1] instanceof SnakeBody && getTailNumber(map) == ((SnakeBody) map[tailX][tailY + 1]).number - 1) {
+                map[tailX][tailY + 1] = new SnakeBody(getTailNumber(map) + 1);
+                map[tailX][tailY] = new EmptyTile();
+                tailY++;
+            }
     }
 
 
@@ -69,9 +93,7 @@ public class SnakeBody implements Tile {
     private static boolean checkNextPosIsLegal(Tile[][] map, int deltaX, int deltaY) {
         Tile nextPos = map[headX + deltaX][headY + deltaY];
         if (nextPos instanceof SnakeBody) {
-            if (((SnakeBody) nextPos).number == getHeadNumber(map) - 1) {
-                return false;
-            }
+            return ((SnakeBody) nextPos).number != getHeadNumber(map) - 1;
         }
         return true;
     }

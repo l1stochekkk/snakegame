@@ -2,7 +2,6 @@ package display;
 
 import core.arrows.*;
 import core.GameMap;
-import core.tiles.SnakeBody;
 import core.tiles.Tile;
 
 import java.util.Objects;
@@ -13,20 +12,20 @@ public class Show {
     public static boolean snakeAlive = true;
 
     public static void display(Tile[][] map) {
-        for (int i = 0; i < map.length; i++) {
+        for (Tile[] rowOfTiles : map) {
             for (int j = 0; j < map.length; j++) {
                 System.out.print(" ");
-                map[i][j].print();
+                rowOfTiles[j].print();
             }
             System.out.println();
         }
     }
 
-    public static void incorrectPos() {
+    private static void incorrectPos() {
         System.out.println("Incorrect input");
     }
 
-    public static Arrow stringToArrow(String scanArrow) {
+    private static Arrow stringToArrow(String scanArrow) {
         return switch (scanArrow) {
             case "w" -> new Up();
             case "a" -> new Left();
@@ -36,7 +35,7 @@ public class Show {
         };
     }
 
-    public static void gameOver(Scanner newGame) {
+    private static void gameOver(Scanner newGame) {
         System.out.println();
         System.out.println("Game over");
         System.out.println("Your score: " + GameMap.getScore());
@@ -49,7 +48,8 @@ public class Show {
 
     }
 
-    public static void gameLoop(Scanner scanArrow) {
+    public static void gameLoop() {
+        Scanner scanArrow = new Scanner(System.in);
         while (Show.snakeAlive) {
             Arrow arrow = stringToArrow(scanArrow.next());
             if (arrow != null) {
@@ -61,8 +61,6 @@ public class Show {
         }
         System.out.println();
         System.out.println("Goodbye!");
-
-        SnakeBody map = new SnakeBody(10);
     }
 
 }
