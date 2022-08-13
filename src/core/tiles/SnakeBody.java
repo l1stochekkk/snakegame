@@ -61,26 +61,20 @@ public class SnakeBody implements Tile {
     }
 
     private static void moveTail(Tile[][] map) {
-            if (map[tailX - 1][tailY] instanceof SnakeBody && getTailNumber(map) == ((SnakeBody) map[tailX - 1][tailY]).number - 1) {
-                map[tailX - 1][tailY] = new SnakeBody(getTailNumber(map) + 1);
+        for (int i = -1; i < 2; i+=2) {
+            if (map[tailX + i][tailY] instanceof SnakeBody && getTailNumber(map) == ((SnakeBody) map[tailX + i][tailY]).number - 1) {
+                map[tailX + i][tailY] = new SnakeBody(getTailNumber(map) + 1);
                 map[tailX][tailY] = new EmptyTile();
-                tailX--;
+                tailX += i;
+                return;
             }
-            else if (map[tailX + 1][tailY] instanceof SnakeBody && getTailNumber(map) == ((SnakeBody) map[tailX + 1][tailY]).number - 1) {
-                map[tailX + 1][tailY] = new SnakeBody(getTailNumber(map) + 1);
+            else if (map[tailX][tailY + i] instanceof SnakeBody && getTailNumber(map) == ((SnakeBody) map[tailX][tailY + i]).number - 1) {
+                map[tailX][tailY + i] = new SnakeBody(getTailNumber(map) + 1);
                 map[tailX][tailY] = new EmptyTile();
-                tailX++;
+                tailY += i;
+                return;
             }
-            else if (map[tailX][tailY - 1] instanceof SnakeBody && getTailNumber(map) == ((SnakeBody) map[tailX][tailY - 1]).number - 1) {
-                map[tailX][tailY - 1] = new SnakeBody(getTailNumber(map) + 1);
-                map[tailX][tailY] = new EmptyTile();
-                tailY--;
-            }
-            else if (map[tailX][tailY + 1] instanceof SnakeBody && getTailNumber(map) == ((SnakeBody) map[tailX][tailY + 1]).number - 1) {
-                map[tailX][tailY + 1] = new SnakeBody(getTailNumber(map) + 1);
-                map[tailX][tailY] = new EmptyTile();
-                tailY++;
-            }
+        }
     }
 
 
