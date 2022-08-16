@@ -1,5 +1,6 @@
 import core.*;
 import display.*;
+import display.Frame;
 
 public class Main {
 
@@ -10,6 +11,8 @@ public class Main {
         Frame.init();
 
         Show.gameLoop();
+
+
 
     }
 }

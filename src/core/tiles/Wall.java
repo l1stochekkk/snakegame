@@ -5,4 +5,9 @@ public class Wall implements Tile {
     public void print() {
         System.out.print("x");
     }
+
+    @Override
+    public String getEntity(){
+        return "x";
+    }
 }

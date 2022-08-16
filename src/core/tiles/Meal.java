@@ -5,4 +5,9 @@ public class Meal implements Tile {
     public void print() {
         System.out.print("*");
     }
+
+    @Override
+    public String getEntity(){
+        return "*";
+    }
 }

@@ -6,9 +6,9 @@ import core.tiles.*;
 
 public class GameMap {
 
-    static int size = 21;
+    public static int size = 21;
 
-    private final static Tile[][] map = new Tile[size][size];
+    public final static Tile[][] map = new Tile[size][size];
 
     public static int getRandomNumber(int min, int max) {
         return (int) ((Math.random() * (max - min)) + min);

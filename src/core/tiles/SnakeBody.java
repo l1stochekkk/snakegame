@@ -11,6 +11,14 @@ public class SnakeBody implements Tile {
     private final int number;
 
     @Override
+    public String getEntity(){
+        if (number == GameMap.getHeadNumber()){
+            return "#";
+        }
+        else return "0";
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
